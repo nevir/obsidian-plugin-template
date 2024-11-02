@@ -37,7 +37,7 @@
   // https://biomejs.dev/reference/configuration/#overrides
   "overrides": [
     {
-      "include": [".vscode/**"],
+      "include": ["tsconfig.json", ".vscode/**"],
       "json": {
         "parser": {
           "allowComments": true,

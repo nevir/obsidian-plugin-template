@@ -1,11 +1,12 @@
 // TypeScript configuration that is common to all environments we work in.
 {
   // https://www.typescriptlang.org/tsconfig
+  //
+  // Note that we enumerate each setting related to type checking so that we
+  // can document our rationale for each.
   "compilerOptions": {
     // Type Checking
     // =============
-    // Note that we enumerate each setting related to type checking so that we
-    // can document our rationale.
 
     // Help catch refactoring errors.
     "allowUnreachableCode": false,
@@ -63,6 +64,52 @@
     "strictPropertyInitialization": true,
 
     // JavaScript allows arbitary types to be thrown.
-    "useUnknownInCatchVariables": true
-  }
+    "useUnknownInCatchVariables": true,
+
+    // Module
+    // ======
+
+    // By default, we use TypeScript as a type checker, not a compiler.
+    //
+    // We use alternative compilers for the environments we work in (vite for
+    // web, ts-node for node, etc).
+    "module": "preserve",
+
+    // Emit
+    // ====
+
+    // By default, we use TypeScript as a type checker, not a compiler.
+    //
+    // We use alternative compilers for the environments we work in (vite for
+    // web, ts-node for node, etc).
+    "noEmit": true,
+
+    // Interop Constraints
+    // ===================
+
+    // Compatibility with CommonJS modules that export a single value as the
+    // entire module (instead of a default export).
+    "allowSyntheticDefaultImports": true,
+
+    // Support other Node.js patterns (such as a function with exports hanging
+    // off of it).
+    "esModuleInterop": true,
+
+    // Make sure we don't blow up in case sensitive file systems.
+    "forceConsistentCasingInFileNames": true,
+
+    // Enforce that we do not require type information from a module's
+    // dependencies in order to properly compile it.
+    //
+    // This allows us to optimize our build times and rely on simplified
+    // compilers.
+    "isolatedModules": true,
+
+    // Project-dependent behavior.
+    "preserveSymlinks": false,
+
+    // import/export type statements are removed from output, but everything
+    // else remains. No magic import elision.
+    "verbatimModuleSyntax": true,
+  },
 }

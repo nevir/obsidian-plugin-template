@@ -15,7 +15,7 @@
     "**/.*": true,
     "**/node_modules/": true,
     "**/*.lock": true,
-    "*config.json": true,
+    "*config.*": true,
     "biome.json*": true,
     "data.json": true,
     "main.js": true,

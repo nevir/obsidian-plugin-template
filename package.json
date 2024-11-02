@@ -1,8 +1,9 @@
 {
+  "type": "module",
   "scripts": {
     ":run-all": "npm-run-all2 --print-name",
-    "build": "rm -rf .build && parcel build",
-    "dev": "parcel watch",
+    "build": "vite build",
+    "dev": "vite build --watch --clearScreen",
     "fix": "yarn :run-all \"fix-*\"",
     "fix-diagnostics": "biome lint --write .",
     "fix-style": "biome check --linter-enabled=false --write .",
@@ -27,12 +28,10 @@
     "@biomejs/biome": "^1.9.4",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
-    "@parcel/packager-ts": "2.12.0",
-    "@parcel/transformer-typescript-types": "2.12.0",
-    "@types/node": "18.15.0",
+    "@types/node": "^18.15.0",
     "npm-run-all2": "^7.0.1",
-    "parcel": "^2.12.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
   },
   "dependencies": {
     "obsidian": "1.7.2"
