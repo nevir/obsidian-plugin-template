@@ -19,6 +19,7 @@
     "biome.json*": true,
     "data.json": true,
     "main.js": true,
+    "styles.css": true,
   },
 
   // TypeScript

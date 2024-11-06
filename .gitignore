@@ -12,4 +12,6 @@ node_modules/
 /main.js
 
 # Obsidian
+/main.js
 /data.json
+/styles.css

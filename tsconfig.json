@@ -111,5 +111,11 @@
     // import/export type statements are removed from output, but everything
     // else remains. No magic import elision.
     "verbatimModuleSyntax": true,
+
+    // Language and Environment
+    // ========================
+
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
   },
 }
