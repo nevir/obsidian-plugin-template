@@ -1,0 +1,16 @@
+{
+  "linter": {
+    // https://biomejs.dev/linter/graphql/rules/
+    "rules": {
+      "style": {
+        // When deprecating something, explain why and what to use instead.
+        "useDeprecatedReason": "error"
+      },
+
+      "suspicious": {
+        // Ensure that fields are not duplicated in a selection set.
+        "noDuplicateFields": "error"
+      }
+    }
+  }
+}

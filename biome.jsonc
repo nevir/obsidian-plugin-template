@@ -1,5 +1,7 @@
 // https://biomejs.dev/reference/configuration/
 {
+  "extends": [".toolchain/biome/graphql.jsonc", ".toolchain/biome/json.jsonc"],
+
   // https://biomejs.dev/reference/configuration/#files
   "vcs": {
     "enabled": true,
@@ -16,9 +18,14 @@
     "lineWidth": 80
   },
 
-  // https://biomejs.dev/reference/configuration/#organizeimports
-  "organizeImports": {
-    "enabled": true
+  // https://biomejs.dev/assist/
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
 
   // https://biomejs.dev/reference/configuration/#javascript
@@ -37,7 +44,7 @@
   // https://biomejs.dev/reference/configuration/#overrides
   "overrides": [
     {
-      "include": [".vscode/**"],
+      "includes": [".vscode/**"],
       "json": {
         "parser": {
           "allowComments": true,
@@ -52,7 +59,10 @@
 
   // https://biomejs.dev/reference/configuration/#linter
   "linter": {
-    // https://biomejs.dev/linter/rules/
+    // https://biomejs.dev/linter/javascript/rules/
+    // https://biomejs.dev/linter/css/rules/
+    // https://biomejs.dev/linter/json/rules/
+
     "rules": {
       // Forces us to be explicit when upgrading Biome.
       "recommended": false,
@@ -75,11 +85,6 @@
         // While this can be problematic for screen readers, it is also
         // something that we find useful in certain scenarios.
         "noAutofocus": "off",
-
-        // target="_blank" MUST be paired with rel="noreferrer" or
-        // rel="noopener", otherwise we've got a security vulnerabilty on our
-        // hands.
-        "noBlankTarget": "error",
 
         // plz no.
         "noDistractingElements": "error",
@@ -112,6 +117,9 @@
         // Avoid re-stating an element's default role.
         "noRedundantRoles": "error",
 
+        // Make sure that a role is set along with onClick.
+        "noStaticElementInteractions": "error",
+
         // Enforce that svg elements have alt text (a <title> or aria-label).
         "noSvgWithoutTitle": "error",
 
@@ -124,17 +132,19 @@
         // Descendant elements (e.g. select box options) must be tabbable.
         "useAriaActivedescendantWithTabindex": "error",
 
-        // Make sure that we're using each aria role appropriately.
+        // Ensure that all required ARIA properties are set for the element's
+        // role.
         "useAriaPropsForRole": "error",
+
+        // Ensure that extraneous ARIA properties are not set for the element's
+        // role.
+        "useAriaPropsSupportedByRole": "error",
 
         // The default button type is 'submit'; that's rarely what you want.
         "useButtonType": "error",
 
         // All interactive elements must be focusable.
         "useFocusableInteractive": "error",
-
-        // Make sure that we have a generic font family as a fallback.
-        "useGenericFontNames": "error",
 
         // Make sure all headers have discernible text.
         "useHeadingContent": "error",
@@ -173,15 +183,27 @@
         // appropriately.
         "useValidAriaValues": "error",
 
+        // Validates the `autocomplete` attribute on input elements.
+        "useValidAutocomplete": "error",
+
         // Sorry, no fictitious languages or countries here.
         "useValidLang": "error"
       },
 
       // https://biomejs.dev/linter/rules/#complexity
       "complexity": {
+        // Multiple spaces are very difficult to notice.
+        "noAdjacentSpacesInRegex": "error",
+
+        // Prefer `...args` over `arguments`.
+        "noArguments": "error",
+
         // Avoid boxed types like Number (vs number) and {}; they're common
         // misconceptions when coming from other languages (e.g. Java).
         "noBannedTypes": "error",
+
+        // You almost certainly didn't intend to use the comma operator.
+        "noCommaOperator": "error",
 
         // Gotta have at least one type parameter.
         "noEmptyTypeParameters": "error",
@@ -197,11 +219,11 @@
         // Use ! or !! rather than the boxed type.
         "noExtraBooleanCast": "error",
 
+        // You can use flat() instead.
+        "noFlatMapIdentity": "error",
+
         // for … of is part of the language now; we prefer it.
         "noForEach": "error",
-
-        // Multiple spaces are very difficult to notice.
-        "noMultipleSpacesInRegularExpressionLiterals": "error",
 
         // This is often a vestige of coming from a more strongly OOP-based
         // language. It's not necessary in JavaScript; you can use a plain
@@ -218,8 +240,14 @@
         // Avoid constructors that do nothing.
         "noUselessConstructor": "error",
 
+        // Only use continue when it changes control flow.
+        "noUselessContinue": "error",
+
         // Likely indicates an incomplete refactor.
         "noUselessEmptyExport": "error",
+
+        // Only escape when necessary.
+        "noUselessEscapeInRegex": "error",
 
         // We only want to use React fragments when necessary.
         "noUselessFragments": "error",
@@ -235,6 +263,9 @@
 
         // Combine those string literals!
         "noUselessStringConcat": "error",
+
+        // Only use String.raw when you need it.
+        "noUselessStringRaw": "error",
 
         // Enforce that default is the last case in a switch statement.
         "noUselessSwitchCase": "error",
@@ -254,9 +285,6 @@
         // Void is often misunderstood, and more fancy than we need.
         "noVoid": "error",
 
-        // We are always working in strict mode, which gives a better error.
-        "noWith": "off",
-
         // Prefer arrow functions unless they're not appropriate (e.g. we need
         // to reference `this`, or are defining a generator).
         //
@@ -275,6 +303,9 @@
         // indexing into a container.
         "useLiteralKeys": "off",
 
+        // No need to parseInt something that can be a literal.
+        "useNumericLiterals": "error",
+
         // Simplify chained comparisons via the Elvis operator.
         "useOptionalChain": "error",
 
@@ -287,7 +318,10 @@
 
         // Avoid expressions that are statically resolved and discard part of
         // the expression.
-        "useSimplifiedLogicExpression": "off"
+        "useSimplifiedLogicExpression": "off",
+
+        // Simplify for loops to while loops when possible.
+        "useWhile": "error"
       },
 
       // https://biomejs.dev/linter/rules/#correctness
@@ -314,9 +348,6 @@
         // If you're going to destructure something, best make it useful.
         "noEmptyPattern": "error",
 
-        // You can use flat() instead.
-        "noFlatMapIdentity": "error",
-
         // Already handled by TypeScript.
         "noGlobalObjectCalls": "off",
 
@@ -335,17 +366,14 @@
         // Ensure that grid areas are valid.
         "noInvalidGridAreas": "error",
 
-        // Already handled by TypeScript.
-        "noInvalidNewBuiltin": "off",
-
         // @import rules must be before all other rules.
         "noInvalidPositionAtImportRule": "error",
 
         // Already handled by TypeScript.
         "noInvalidUseBeforeDeclaration": "off",
 
-        // Already handled by TypeScript.
-        "noNewSymbol": "off",
+        // Make sure you use var() when referencing CSS variables.
+        "noMissingVarFunction": "error",
 
         // Project-dependent.
         "noNodejsModules": "off",
@@ -355,6 +383,9 @@
 
         // Handled by TypeScript as a warning; we want it to be an error.
         "noPrecisionLoss": "error",
+
+        // Project-specific.
+        "noPrivateImports": "off",
 
         // Handled by react-dom's typings.
         "noRenderReturnValue": "off",
@@ -386,6 +417,15 @@
         // Make sure we use known CSS properties.
         "noUnknownProperty": "error",
 
+        // Ensure that we use known CSS :pseudo-classes.
+        "noUnknownPseudoClass": "error",
+
+        // Ensure that we use known CSS ::pseudo-elements.
+        "noUnknownPseudoElement": "error",
+
+        // Ensure that we select known elements.
+        "noUnknownTypeSelector": "error",
+
         // Make sure we use known CSS units.
         "noUnknownUnit": "error",
 
@@ -400,9 +440,6 @@
 
         // Already handled by TypeScript.
         "noUnusedPrivateClassMembers": "off",
-
-        // Likely indicates an incomplete refactor or confusion.
-        "noUnnecessaryContinue": "error",
 
         // Already handled by TypeScript.
         "noUnreachable": "off",
@@ -428,9 +465,6 @@
         // If you have a void reeturn type, you should not return anything.
         "noVoidTypeReturn": "error",
 
-        // Prefer array literas vs constructing arrays.
-        "useArrayLiterals": "error",
-
         // Make sure that we're correctly including referenced values in
         // useMemo, etc.
         "useExhaustiveDependencies": "error",
@@ -450,6 +484,9 @@
         // Catch cases where we're iterating in the wrong direction.
         "useValidForDirection": "error",
 
+        // Already handled by TypeScript.
+        "useValidTypeof": "off",
+
         // If you are authoring a generator, make sure it yields something.
         "useYield": "error"
       },
@@ -465,6 +502,15 @@
         // In general, we want to avoid busting the VM's shape cache.
         "noDelete": "error",
 
+        // Dynamic references to an import tend to break bundler optimizations.
+        "noDynamicNamespaceImportAccess": "error",
+
+        // Can be helpful for readability and dynamic referencing.
+        "noNamespaceImport": "off",
+
+        // This is not a Next.js project.
+        "noImgElement": "error",
+
         // There are cases where we want this, especially in libraries.
         "noReExportAll": "error",
 
@@ -476,6 +522,11 @@
 
       // https://biomejs.dev/linter/rules/#security
       "security": {
+        // target="_blank" MUST be paired with rel="noreferrer" or
+        // rel="noopener", otherwise we've got a security vulnerabilty on our
+        // hands.
+        "noBlankTarget": "error",
+
         // Prevent a class of XSS attacks.
         "noDangerouslySetInnerHtml": "error",
 
@@ -488,12 +539,6 @@
 
       // https://biomejs.dev/linter/rules/#style
       "style": {
-        // Prefer `...args` over `arguments`.
-        "noArguments": "error",
-
-        // You almost certainly didn't intend to use the comma operator.
-        "noCommaOperator": "error",
-
         // While we agree with default exports being awkward in IDEs, there
         // are cases where default exports are the ergonomic choice for an API,
         // and editors are getting better at handling them.
@@ -510,9 +555,6 @@
 
         // Namespaces can be helpful for some organization strategies.
         "noNamespace": "off",
-
-        // Can be helpful for readability and dynamic referencing.
-        "noNamespaceImport": "off",
 
         // When you've got a multi-case negated condition, prefer the
         // un-negated version (no one likes double negatives).
@@ -542,11 +584,11 @@
         // We prefer flat style functions over nested functions.
         "noUselessElse": "error",
 
-        // Use let or const.
-        "noVar": "error",
-
         // Speak regularly, we do.
         "noYodaExpression": "error",
+
+        // Prefer array literals vs constructing arrays.
+        "useArrayLiterals": "error",
 
         // Use as const when possible to lock in literal types.
         "useAsConstAssertion": "error",
@@ -626,26 +668,14 @@
         // Use Number.* instead of their global counterparts.
         "useNumberNamespace": "error",
 
-        // No need to parseInt something that can be a literal.
-        "useNumericLiterals": "error",
-
         // Prefer <div /> over <div></div>
         "useSelfClosingElements": "error",
-
-        // Prefer value[] over Array<value>
-        "useShorthandArrayType": "error",
 
         // Prefer a += 1 over a = a + 1
         "useShorthandAssign": "error",
 
         // When possible, use shorthand function types instead of interfaces.
         "useShorthandFunctionType": "error",
-
-        // When we're using case statments, there are times where it is helpful
-        // to have shared behavior for multiple cases.
-        //
-        // Otherwise, just use if statements.
-        "useSingleCaseStatement": "error",
 
         // One declaration per line.
         "useSingleVarDeclarator": "error",
@@ -657,10 +687,7 @@
         "useThrowNewError": "off",
 
         // Let's not use exceptions for control flow.
-        "useThrowOnlyError": "error",
-
-        // Simplify for loops to while loops when possible.
-        "useWhile": "error"
+        "useThrowOnlyError": "error"
       },
 
       // https://biomejs.dev/linter/rules/#suspicious
@@ -698,9 +725,6 @@
 
         // Project-dependent.
         "noConsole": "off",
-
-        // Project-dependent.
-        "noConsoleLog": "off",
 
         // While the inlining of const enums is nice, it also adds to the
         // complexity of our build setup (type information of imports becomes
@@ -847,6 +871,12 @@
         // Catch cases where we're negating the wrong thing.
         "noUnsafeNegation": "error",
 
+        // Use let or const.
+        "noVar": "error",
+
+        // We are always working in strict mode, which gives a better error.
+        "noWith": "off",
+
         // Make sure that each function is in the Promise's stack.
         "useAwait": "error",
 
@@ -866,10 +896,7 @@
         "useNamespaceKeyword": "error",
 
         // Be explicit about the number of digits you want.
-        "useNumberToFixedDigitsArgument": "error",
-
-        // Already handled by TypeScript.
-        "useValidTypeof": "off"
+        "useNumberToFixedDigitsArgument": "error"
       }
     }
   }

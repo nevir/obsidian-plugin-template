@@ -1,40 +1,40 @@
 {
-  "scripts": {
-    ":run-all": "npm-run-all2 --print-name",
-    "build": "rm -rf .build && parcel build",
-    "dev": "parcel watch",
-    "fix": "yarn :run-all \"fix-*\"",
-    "fix-diagnostics": "biome lint --write .",
-    "fix-style": "biome check --linter-enabled=false --write .",
-    "test": "yarn :run-all \"test-*\"",
-    "test-diagnostics": "biome lint .",
-    "test-style": "biome check --linter-enabled=false ."
-  },
-  "targets": {
-    "default": {
-      "source": "src/main.ts",
-      "distDir": ".",
-      "isLibrary": true,
-      "context": "node",
-      "outputFormat": "commonjs",
-      "sourceMap": {
-        "inline": true
-      }
-    }
-  },
-  "packageManager": "yarn@4.5.1",
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@codemirror/state": "^6.0.0",
-    "@codemirror/view": "^6.0.0",
-    "@parcel/packager-ts": "2.12.0",
-    "@parcel/transformer-typescript-types": "2.12.0",
-    "@types/node": "18.15.0",
-    "npm-run-all2": "^7.0.1",
-    "parcel": "^2.12.0",
-    "typescript": "^5.6.3"
-  },
-  "dependencies": {
-    "obsidian": "1.7.2"
-  }
+	"scripts": {
+		":run-all": "npm-run-all2 --print-name",
+		"build": "rm -rf .build && parcel build",
+		"dev": "parcel watch",
+		"fix": "yarn :run-all \"fix-*\"",
+		"fix-diagnostics": "biome lint --write .",
+		"fix-style": "biome check --linter-enabled=false --write .",
+		"test": "yarn :run-all \"test-*\"",
+		"test-diagnostics": "biome lint .",
+		"test-style": "biome check --linter-enabled=false ."
+	},
+	"targets": {
+		"default": {
+			"source": "src/main.ts",
+			"distDir": ".",
+			"isLibrary": true,
+			"context": "node",
+			"outputFormat": "commonjs",
+			"sourceMap": {
+				"inline": true
+			}
+		}
+	},
+	"packageManager": "yarn@4.9.2",
+	"devDependencies": {
+		"@biomejs/biome": "^2.1.2",
+		"@codemirror/state": "^6.0.0",
+		"@codemirror/view": "^6.0.0",
+		"@parcel/packager-ts": "2.12.0",
+		"@parcel/transformer-typescript-types": "2.12.0",
+		"@types/node": "18.15.0",
+		"npm-run-all2": "^7.0.1",
+		"parcel": "^2.12.0",
+		"typescript": "^5.6.3"
+	},
+	"dependencies": {
+		"obsidian": "1.7.2"
+	}
 }

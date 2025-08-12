@@ -12,13 +12,13 @@
 
   // Workspace
   "files.exclude": {
-    "**/.*": true,
-    "**/node_modules/": true,
-    "**/*.lock": true,
-    "*config.json": true,
-    "biome.json*": true,
-    "data.json": true,
-    "main.js": true,
+    "**/.*": false,
+    "**/node_modules/": false,
+    "**/*.lock": false,
+    "*config.json": false,
+    "biome.json*": false,
+    "data.json": false,
+    "main.js": false,
   },
 
   // TypeScript
@@ -30,7 +30,7 @@
   // JSON
   "json.schemas": [
     {
-      "fileMatch": ["{,**/}biome.jsonc"],
+      "fileMatch": ["{,**/}biome.jsonc", ".toolchain/biome/**/*.jsonc"],
       "url": "/node_modules/@biomejs/biome/configuration_schema.json",
     },
   ],
