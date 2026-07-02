@@ -7,7 +7,7 @@ export class Plugin extends obsidian.Plugin {
   settings: Settings = DEFAULT_SETTINGS;
 
   override async onload() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = { ...DEFAULT_SETTINGS, ...(await this.loadData()) };
     this.addSettingTab(new SettingsTab(this.app, this));
   }
 

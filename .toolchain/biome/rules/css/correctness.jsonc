@@ -1,12 +1,6 @@
 {
   "linter": {
-    // https://biomejs.dev/linter/css/rules/
     "rules": {
-      "a11y": {
-        // Make sure that we have a generic font family as a fallback.
-        "useGenericFontNames": "error"
-      },
-
       "correctness": {
         // Common class of mistake when using linear-gradient().
         "noInvalidDirectionInLinearGradient": "error",
@@ -43,26 +37,7 @@
 
         // Catch selectors that cannot match any elements.
         "noUnmatchableAnbSelector": "error"
-      },
-
-      "style": {
-        // Nice in theory, but in practice this is too noisy.
-        "noDescendingSpecificity": "error"
       }
     }
-  },
-
-  "overrides": [
-    {
-      "includes": ["**/*.css"],
-      "assist": {
-        "actions": {
-          "source": {
-            // It is context-dependent whether keys should be sorted.
-            "useSortedKeys": "off"
-          }
-        }
-      }
-    }
-  ]
+  }
 }

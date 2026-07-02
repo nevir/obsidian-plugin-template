@@ -5,7 +5,7 @@ import type { Plugin } from './Plugin';
 export class SettingsTab extends obsidian.PluginSettingTab {
   constructor(
     app: obsidian.App,
-    private plugin: Plugin,
+    private readonly plugin: Plugin,
   ) {
     super(app, plugin);
   }
@@ -19,8 +19,8 @@ export class SettingsTab extends obsidian.PluginSettingTab {
       .setName(`Thingy`)
       .setDesc(`It does a thingy`)
       .addText(text =>
-        text.setValue(settings.thingy || '').onChange(value => {
-          this.plugin.setSetting(
+        text.setValue(settings.thingy ?? '').onChange(async value => {
+          await this.plugin.setSetting(
             'thingy',
             value.trim() === '' ? undefined : value,
           );
@@ -34,8 +34,8 @@ export class SettingsTab extends obsidian.PluginSettingTab {
         slider
           .setLimits(0, 100, 1)
           .setValue(this.plugin.settings.required)
-          .onChange(value => {
-            this.plugin.setSetting('required', value);
+          .onChange(async value => {
+            await this.plugin.setSetting('required', value);
           }),
       );
   }

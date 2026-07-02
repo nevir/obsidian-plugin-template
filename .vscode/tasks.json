@@ -3,11 +3,11 @@
   "tasks": [
     {
       "label": "install",
-      "detail": "yarn install",
-
-      "type": "npm",
-      "script": "install",
-
+      "detail": "Install the locked JavaScript dependencies",
+      "type": "process",
+      "command": "mise",
+      "args": ["run", "install"],
+      "problemMatcher": [],
       "presentation": {
         "clear": true,
         "close": true,
@@ -19,20 +19,69 @@
         "showReuseMessage": false,
       },
       "icon": {
-        "id": "circuit-board",
+        "id": "cloud-download",
         "color": "terminal.ansiGreen",
       },
     },
-
+    {
+      "label": "check",
+      "detail": "Run every required validation",
+      "type": "process",
+      "command": "mise",
+      "args": ["run", "check"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true,
+      },
+      "presentation": {
+        "clear": true,
+        "close": false,
+        "echo": true,
+        "focus": false,
+        "group": "test",
+        "panel": "dedicated",
+        "reveal": "always",
+        "showReuseMessage": false,
+      },
+      "icon": {
+        "id": "check-all",
+        "color": "terminal.ansiGreen",
+      },
+    },
+    {
+      "label": "build",
+      "detail": "Build the production Obsidian plugin bundle",
+      "type": "process",
+      "command": "mise",
+      "args": ["run", "build"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true,
+      },
+      "presentation": {
+        "clear": true,
+        "close": true,
+        "echo": true,
+        "focus": false,
+        "group": "build",
+        "panel": "dedicated",
+        "reveal": "always",
+        "showReuseMessage": false,
+      },
+      "icon": {
+        "id": "package",
+        "color": "terminal.ansiGreen",
+      },
+    },
     {
       "label": "dev",
-      "detail": "parcel watch",
-
-      "type": "npm",
-      "script": "dev",
+      "detail": "Rebuild the plugin bundle as source files change",
+      "type": "process",
+      "command": "mise",
+      "args": ["run", "dev"],
       "isBackground": true,
-      "dependsOn": ["install"],
-
       "problemMatcher": {
         "pattern": {
           "regexp": ".",
@@ -43,7 +92,6 @@
           "endsPattern": "Built",
         },
       },
-
       "presentation": {
         "clear": true,
         "close": true,
@@ -57,10 +105,6 @@
       "icon": {
         "id": "circuit-board",
         "color": "terminal.ansiGreen",
-      },
-
-      "runOptions": {
-        "runOn": "folderOpen",
       },
     },
   ],

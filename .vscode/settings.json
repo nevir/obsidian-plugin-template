@@ -26,12 +26,18 @@
   "typescript.preferences.quoteStyle": "single",
   "javascript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
 
   // JSON
   "json.schemas": [
     {
       "fileMatch": ["{,**/}biome.jsonc", ".toolchain/biome/**/*.jsonc"],
       "url": "/node_modules/@biomejs/biome/configuration_schema.json",
+    },
+    {
+      "fileMatch": [".toolchain/typescript/**/*.jsonc"],
+      "url": "https://json.schemastore.org/tsconfig",
     },
   ],
 }
