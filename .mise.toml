@@ -6,7 +6,7 @@ lockfile = true
 [tools]
 actionlint = "1.7"
 node = "24"
-yarn = "4"
+"aqua:yarnpkg/berry" = "4"
 
 [tasks.install]
 description = "Install the locked JavaScript dependencies"

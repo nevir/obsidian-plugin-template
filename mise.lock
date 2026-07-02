@@ -19,6 +19,19 @@ checksum = "sha256:6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f
 url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_windows_amd64.zip"
 provenance = "github-attestations"
 
+[[tools."aqua:yarnpkg/berry"]]
+version = "4.17.0"
+backend = "aqua:yarnpkg/berry"
+
+[tools."aqua:yarnpkg/berry"."platforms.linux-x64"]
+url = "https://repo.yarnpkg.com/4.17.0/packages/yarnpkg-cli/bin/yarn.js"
+
+[tools."aqua:yarnpkg/berry"."platforms.macos-arm64"]
+url = "https://repo.yarnpkg.com/4.17.0/packages/yarnpkg-cli/bin/yarn.js"
+
+[tools."aqua:yarnpkg/berry"."platforms.windows-x64"]
+url = "https://repo.yarnpkg.com/4.17.0/packages/yarnpkg-cli/bin/yarn.js"
+
 [[tools.node]]
 version = "24.18.0"
 backend = "core:node"
@@ -34,7 +47,3 @@ url = "https://nodejs.org/dist/v24.18.0/node-v24.18.0-darwin-arm64.tar.gz"
 [tools.node."platforms.windows-x64"]
 checksum = "sha256:0ae68406b42d7725661da979b1403ec9926da205c6770827f33aac9d8f26e821"
 url = "https://nodejs.org/dist/v24.18.0/node-v24.18.0-win-x64.zip"
-
-[[tools.yarn]]
-version = "4.17.0"
-backend = "vfox:mise-plugins/vfox-yarn"
