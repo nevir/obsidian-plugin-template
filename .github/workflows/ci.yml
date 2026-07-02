@@ -21,10 +21,15 @@ jobs:
             task: typecheck
           - name: Build
             task: build
+          - name: Version
+            task: versioncheck
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v7
+        with:
+          # Yarn version check needs the base branch and full history.
+          fetch-depth: 0
 
       - name: Install the locked toolchain
         uses: jdx/mise-action@v4

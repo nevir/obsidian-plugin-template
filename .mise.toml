@@ -47,6 +47,15 @@ description = "Type-check the plugin without emitting files"
 depends = ["install"]
 run = "yarn exec tsc"
 
+[tasks.versioncheck]
+description = "Check that changes declare a version and manifests agree"
+depends = ["install"]
+run = [
+  "yarn version check",
+  "node .toolchain/check-version-plan.mjs",
+  "node .toolchain/sync-version.mjs --check",
+]
+
 [tasks.check]
 description = "Run every required validation"
 depends = ["lint", "typecheck", "build"]
